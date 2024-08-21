@@ -6,7 +6,7 @@ const DogApi = () => {
   const [DogList, setDogList] = useState([]);
 
   const getDogList = async () => {
-    const res = await axios
+    await axios
       .get("https://dog.ceo/api/breeds/image/random")
       .then((res) => setDogList(res.data));
   };
@@ -17,6 +17,9 @@ const DogApi = () => {
     getDogList();
   }, []);
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
   return (
     <Container>
       <Wrapper>
@@ -24,6 +27,7 @@ const DogApi = () => {
           <img src={DogList.message} alt="image" />
         </div>
         <h3>Dogs Crossbreeds that are too cute</h3>
+        <button onClick={reloadPage}>Another Breed</button>
       </Wrapper>
     </Container>
   );
@@ -32,6 +36,7 @@ const DogApi = () => {
 export default DogApi;
 
 const Container = styled.div`
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,6 +49,16 @@ const Wrapper = styled.div`
 
   h3 {
     font-family: sans-serif;
+  }
+  button {
+    width: 120px;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    font-family: sans-serif;
+    background-color: black;
+    color: white;
+    cursor: pointer;
   }
 
   div {
